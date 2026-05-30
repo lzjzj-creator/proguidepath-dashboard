@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "resume-platform",
+  "packageManager": "npm@11.16.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:optimizer": "npm -w apps/resume-optimizer run dev",
+    "dev:generator": "npm -w apps/resume-generator run dev",
+    "dev:landing": "npm -w apps/landing-page run dev",
+    "build": "turbo build",
+    "clean": "turbo clean"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.5.0"
+  }
+}

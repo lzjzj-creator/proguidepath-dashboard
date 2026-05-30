@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://api.siliconflow.cn/v1",
+  "apiKey": "sk-moigpuclzyqcdtcqgbfqodkgxdjmrkxlqozjpabhcxbqdqqd",
+  "model": "Qwen/Qwen2.5-72B-Instruct"
+}
+

@@ -1,0 +1,14 @@
+node_modules/
+.turbo/
+dist/
+.next/
+*.env.local
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.env
+backend/data/
+*.err.log
+*.out.log
+apps/resume-generator/supabase/.temp/
+apps/landing-page/.env
