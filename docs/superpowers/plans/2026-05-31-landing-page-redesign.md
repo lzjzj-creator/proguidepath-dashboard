@@ -1,0 +1,531 @@
+# Landing Page Redesign — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Rewrite the landing page HTML/CSS with the Future Academic design system: warm paper background, left-aligned hero, asymmetrical navigation cards, pill-shaped elements, ghost watermark, and background noise texture.
+
+**Architecture:** Single-file static HTML page served by Vite. All styles inline in `<style>`. Google Fonts for Latin display fonts, system fonts for Chinese. No JS framework dependencies.
+
+**Tech Stack:** Vite 6.4, static HTML, CSS custom properties, Google Fonts (Bricolage Grotesque + Outfit)
+
+---
+
+### Task 1: Rewrite index.html with new design system
+
+**Files:**
+- Modify: `apps/landing-page/index.html` (full rewrite)
+
+- [ ] **Step 1: Update font links and HTML structure**
+
+Replace the existing head section with new font loading (Bricolage Grotesque for headings, Outfit for body) and the new HTML shell:
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>简历工作台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  var OPTIMIZER_URL = "%VITE_OPTIMIZER_URL%".replace(/^%.+%$/,"") || "http://localhost:5173";
+  var GENERATOR_URL = "%VITE_GENERATOR_URL%".replace(/^%.+%$/,"") || "http://localhost:3000";
+</script>
+<style>
+  /* ... new styles in next steps ... */
+</style>
+</head>
+<body>
+  <!-- ... new body in next steps ... -->
+</body>
+</html>
+```
+
+- [ ] **Step 2: Add CSS design tokens and reset**
+
+```css
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #f7f5f0;
+  --color-surface: #ffffff;
+  --color-navy: #0f1a2e;
+  --color-navy-light: #1a2d4a;
+  --color-terracotta: #c4644a;
+  --color-terracotta-light: #d47a5e;
+  --color-teal: #2d7d7a;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b6560;
+  --color-text-muted: #a09890;
+  --color-border: #e2ddd6;
+  --color-border-hover: #c9c2b8;
+  --font-display: 'Bricolage Grotesque', 'PingFang SC', sans-serif;
+  --font-body: 'Outfit', 'PingFang SC', 'Noto Sans SC', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  width: 100%;
+  max-width: 1152px;
+  padding: 2.5rem 2rem;
+  margin: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+```
+
+- [ ] **Step 3: Add ghost watermark**
+
+```css
+/* Ghost watermark */
+.page::before {
+  content: 'RESUME';
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  font-family: var(--font-display);
+  font-size: clamp(120px, 20vw, 280px);
+  font-weight: 800;
+  color: rgba(15, 26, 46, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.06em;
+  user-select: none;
+}
+```
+
+- [ ] **Step 4: Header section**
+
+```css
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 8px rgba(15,26,46,0.06);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-teal);
+}
+```
+
+- [ ] **Step 5: Hero section — left-aligned, bold, with terracotta accent bar**
+
+```css
+/* Hero */
+.hero {
+  margin-bottom: 4.5rem;
+  max-width: 720px;
+}
+
+.hero h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--color-navy);
+  margin-bottom: 0.5rem;
+}
+
+.hero-accent-bar {
+  width: 64px;
+  height: 5px;
+  background: var(--color-terracotta);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 2rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-terracotta);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 200ms, transform 200ms;
+  box-shadow: 0 4px 16px rgba(196, 100, 74, 0.25);
+}
+
+.hero-cta:hover {
+  background: var(--color-terracotta-light);
+  transform: translateY(-1px);
+}
+```
+
+- [ ] **Step 6: Asymmetrical navigation cards — no interior dividers, pill-style containers**
+
+```css
+/* Cards row */
+.cards-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  align-items: flex-start;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-radius: 28px;
+  padding: 2rem 2rem 1.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 8px rgba(15,26,46,0.06);
+  transition: box-shadow 250ms, transform 250ms;
+  position: relative;
+}
+
+.card:first-child {
+  flex: 1.3;
+}
+
+.card:last-child {
+  margin-top: 1.5rem;
+  flex: 1;
+}
+
+.card:hover {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 32px rgba(15,26,46,0.10);
+  transform: translateY(-2px);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-navy);
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+  margin-bottom: 0.5rem;
+}
+
+.card > p {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.card-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-border);
+  margin-top: auto;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: rgba(196, 100, 74, 0.08);
+  color: var(--color-terracotta);
+}
+
+.card-arrow {
+  margin-left: auto;
+  color: var(--color-text-muted);
+  transition: transform 250ms, color 250ms;
+}
+
+.card:hover .card-arrow {
+  color: var(--color-terracotta);
+  transform: translateX(4px);
+}
+```
+
+- [ ] **Step 7: Footer pill and responsive rules**
+
+```css
+/* Footer pill */
+.footer-pill {
+  max-width: 100%;
+  background: var(--color-navy);
+  border-radius: 999px;
+  padding: 1rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(15, 26, 46, 0.12);
+}
+
+.footer-pill p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.footer-pill-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-pill-links a {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  transition: color 200ms;
+}
+
+.footer-pill-links a:hover {
+  color: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1.5rem 1rem;
+    margin: 0.5rem;
+  }
+  .hero {
+    max-width: 100%;
+  }
+  .hero h2 {
+    font-size: 2rem;
+  }
+  .cards-row {
+    flex-direction: column;
+  }
+  .card:last-child {
+    margin-top: 0;
+  }
+  .footer-pill {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    border-radius: 28px;
+  }
+  .header {
+    margin-bottom: 2.5rem;
+  }
+}
+```
+
+- [ ] **Step 8: Assemble the full HTML body**
+
+```html
+<body>
+
+<div class="page">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+      </div>
+      <h1>简历工作台</h1>
+    </div>
+    <span class="status-tag">
+      <span class="status-dot"></span>
+      就绪
+    </span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h2>你的下一份简历<br>从这里开始</h2>
+    <div class="hero-accent-bar"></div>
+    <p>面向校招的 AI 简历工作台 — 导入已有简历或从零开始，两种方式任你选择。</p>
+    <a class="hero-cta" href="#" onclick="event.preventDefault();document.querySelector('.cards-row').scrollIntoView({behavior:'smooth'})">
+      开始使用
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards-row">
+    <div class="card" role="button" tabindex="0" onclick="window.location.href=OPTIMIZER_URL">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <h3>我有简历</h3>
+      <p>上传已有的简历文件，AI 智能分析、优化排版、匹配岗位，让简历更具竞争力。</p>
+      <div class="card-tag-row">
+        <span class="card-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></polyline></svg>
+          简历优化助手
+        </span>
+        <span class="card-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="card" role="button" tabindex="0" onclick="window.location.href=GENERATOR_URL">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <line x1="19" y1="8" x2="19" y2="14"/>
+          <line x1="22" y1="11" x2="16" y2="11"/>
+        </svg>
+      </div>
+      <h3>从零开始</h3>
+      <p>无需简历模板，通过步骤引导逐步创建一份专业简历，轻松打造属于你的精彩履历。</p>
+      <div class="card-tag-row">
+        <span class="card-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          简历生成助手
+        </span>
+        <span class="card-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer pill -->
+  <div class="footer-pill">
+    <p>支持 PDF、DOCX 格式 · 安全加密传输 · 免费使用</p>
+    <div class="footer-pill-links">
+      <a href="#" onclick="event.preventDefault()">隐私政策</a>
+      <a href="#" onclick="event.preventDefault()">使用条款</a>
+      <a href="#" onclick="event.preventDefault()">帮助</a>
+    </div>
+  </div>
+</div>
+
+</body>
+```
+
+- [ ] **Step 9: Run dev server to verify**
+
+The dev server should already be running. Visit http://localhost:3456 to confirm:
+- Warm paper background with subtle noise texture
+- Left-aligned bold headline with terracotta accent bar
+- Two asymmetrical cards (left wider, right offset)
+- Pill-shaped navy footer
+- No visible rectangular blocks (all containers have large border-radius)
+
+Run: Open http://localhost:3456 in browser
+Expected: Full redesign visible, responsive at mobile widths
+
+- [ ] **Step 10: Commit**
+
+```bash
+git add apps/landing-page/index.html
+git commit -m "feat: redesign landing page with Future Academic design system"
+```

@@ -141,9 +141,9 @@ const ExperienceCard = ({
     key={experience.id}
     onClick={() => setActiveExperienceId(experience.id)}
     className={cn(
-      "rounded-[28px] border bg-surface p-5 transition card-lift",
+      "rounded-[28px] border bg-surface p-5 transition",
       isActive
-        ? "border-coral shadow-[0_18px_50px_rgba(232,169,155,0.12)] active-glow"
+        ? "border-coral shadow-[0_18px_50px_rgba(232,169,155,0.12)]"
         : "border-border",
     )}
   >
@@ -168,7 +168,7 @@ const ExperienceCard = ({
             event.stopPropagation();
             onDelete(experience.id);
           }}
-          className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-coral-deep hover:text-coral btn-press"
+          className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-coral-deep hover:text-coral"
         >
           删除
         </button>
@@ -786,20 +786,20 @@ function ResumeStudioContent({
                       setStatus("已开始新的草稿。");
                     });
                   }}
-                  className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-coral-deep hover:text-coral btn-press"
+                  className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-coral-deep hover:text-coral"
                 >
                   新建草稿
                 </button>
               </div>
 
-              <div className="stagger-enter mt-6 space-y-3">
+              <div className="mt-6 space-y-3">
                 {steps.map((step, index) => (
                   <button
                     key={step.id}
                     type="button"
                     onClick={() => moveToStep(index)}
                     className={cn(
-                      "w-full rounded-[24px] border px-4 py-4 text-left transition btn-press",
+                      "w-full rounded-[24px] border px-4 py-4 text-left transition",
                       currentStep === index
                         ? "border-coral bg-coral text-white shadow-[0_18px_50px_rgba(232,169,155,0.22)]"
                         : "border-border bg-white hover:border-coral-deep/30",
@@ -855,7 +855,7 @@ function ResumeStudioContent({
                   </div>
 
                   {currentStepId === "target" && (
-                    <div key="step-target" className="step-enter grid gap-4 md:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-3">
                       <label className="field md:col-span-3">
                         <span>姓名</span>
                         <input
@@ -1004,7 +1004,7 @@ function ResumeStudioContent({
                   )}
 
                   {currentStepId === "education" && (
-                    <div key="step-education" className="step-enter grid gap-4 md:grid-cols-2">
+                    <div className="grid gap-4 md:grid-cols-2">
                       <label className="field">
                         <span>学校</span>
                         <input
@@ -1067,7 +1067,7 @@ function ResumeStudioContent({
                   )}
 
                   {currentStepId === "experience" && (
-                    <div key="step-experience" className="step-enter space-y-4">
+                    <div className="space-y-4">
                       <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-coral">
                         社会经历
                       </p>
@@ -1106,7 +1106,7 @@ function ResumeStudioContent({
                             experiences: [...current.experiences, next],
                           }));
                         }}
-                        className="rounded-full border border-dashed border-coral/40 px-4 py-3 text-sm text-coral transition hover:border-coral btn-press-deep"
+                        className="rounded-full border border-dashed border-coral/40 px-4 py-3 text-sm text-coral transition hover:border-coral-deep"
                       >
                         + 新增社会经历
                       </button>
@@ -1115,7 +1115,7 @@ function ResumeStudioContent({
 
 
                   {currentStepId === "skills" && (
-                    <div key="step-skills" className="step-enter grid gap-4 md:grid-cols-2">
+                    <div className="grid gap-4 md:grid-cols-2">
                       <label className="field md:col-span-2">
                         <span>技能证书</span>
                         <input
@@ -1185,7 +1185,7 @@ function ResumeStudioContent({
                   )}
 
                   {currentStepId === "campus" && (
-                    <div key="step-campus" className="step-enter space-y-4">
+                    <div className="space-y-4">
                       <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-coral">
                         校园经历
                       </p>
@@ -1224,7 +1224,7 @@ function ResumeStudioContent({
                             experiences: [...current.experiences, next],
                           }));
                         }}
-                        className="rounded-full border border-dashed border-coral/40 px-4 py-3 text-sm text-coral transition hover:border-coral btn-press-deep"
+                        className="rounded-full border border-dashed border-coral/40 px-4 py-3 text-sm text-coral transition hover:border-coral-deep"
                       >
                         + 新增校园经历
                       </button>
@@ -1240,7 +1240,7 @@ function ResumeStudioContent({
                         type="button"
                         disabled={currentStep === 0}
                         onClick={() => moveToStep(currentStep - 1)}
-                        className="rounded-full border border-border px-5 py-3 text-sm transition hover:border-coral-deep hover:text-coral disabled:cursor-not-allowed disabled:opacity-40 btn-press"
+                        className="rounded-full border border-border px-5 py-3 text-sm transition hover:border-coral-deep hover:text-coral disabled:cursor-not-allowed disabled:opacity-40"
                       >
                         上一步
                       </button>
@@ -1280,7 +1280,7 @@ function ResumeStudioContent({
                       <button
                         type="button"
                         onClick={() => setMode("intake")}
-                        className="rounded-full border border-border px-4 py-3 text-sm transition hover:border-coral-deep hover:text-coral btn-press"
+                        className="rounded-full border border-border px-4 py-3 text-sm transition hover:border-coral-deep hover:text-coral"
                       >
                         返回采集
                       </button>
@@ -1338,7 +1338,7 @@ function ResumeStudioContent({
                   <div
                     key={`${message.role}-${index}`}
                     className={cn(
-                      "rounded-[24px] px-4 py-4 text-sm leading-7 message-enter",
+                      "rounded-[24px] px-4 py-4 text-sm leading-7",
                       message.role === "assistant"
                         ? "bg-white text-slate-700"
                         : "bg-coral text-white",
@@ -1356,7 +1356,7 @@ function ResumeStudioContent({
                       key={card.id}
                       type="button"
                       onClick={() => applyCard(card)}
-                      className="w-full rounded-[22px] border border-border bg-white px-4 py-3 text-left text-sm transition hover:border-coral-deep hover:text-coral card-lift"
+                      className="w-full rounded-[22px] border border-border bg-white px-4 py-3 text-left text-sm transition hover:border-coral-deep hover:text-coral"
                     >
                       <div className="flex items-center justify-between gap-3">
                         <p className="font-medium">{card.label}</p>
@@ -1395,7 +1395,7 @@ function ResumeStudioContent({
                     type="button"
                     disabled={isRewriting}
                     onClick={rewriteSelectedBlock}
-                    className="mt-4 w-full rounded-full bg-coral px-4 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60 btn-press btn-press btn-press"
+                    className="mt-4 w-full rounded-full bg-coral px-4 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isRewriting ? "改写中..." : "改写当前区块"}
                   </button>
@@ -1403,10 +1403,8 @@ function ResumeStudioContent({
               )}
 
               {mode === "intake" && isChatLoading && (
-                <div className="mt-4 rounded-[24px] bg-white px-4 py-3 text-sm text-slate-500">
-                  <div className="dot-pulse">
-                    <span></span><span></span><span></span>
-                  </div>
+                <div className="mt-4 rounded-[24px] bg-white px-4 py-4 text-sm leading-7 text-slate-500">
+                  正在思考...
                 </div>
               )}
 
@@ -1425,7 +1423,7 @@ function ResumeStudioContent({
                     type="button"
                     disabled={isChatLoading}
                     onClick={sendAssist}
-                    className="mt-4 w-full rounded-full bg-coral px-4 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60 btn-press btn-press btn-press"
+                    className="mt-4 w-full rounded-full bg-coral px-4 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isChatLoading ? "思考中..." : "发送"}
                   </button>
@@ -1493,16 +1491,7 @@ export function ResumeStudio() {
   if (!ready) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-bg">
-        <div className="flex w-full max-w-2xl flex-col items-center gap-6 px-8">
-          <div className="skeleton-pill h-6 w-48" />
-          <div className="skeleton-pill h-4 w-72" />
-          <div className="mt-4 flex w-full gap-4">
-            <div className="skeleton-pill h-40 flex-1" />
-            <div className="skeleton-pill h-40 flex-1" />
-          </div>
-          <div className="skeleton-pill h-24 w-full" />
-          <p className="mt-2 text-sm text-muted">正在加载你的草稿...</p>
-        </div>
+        <div className="text-sm text-slate-500">正在加载草稿...</div>
       </div>
     );
   }
