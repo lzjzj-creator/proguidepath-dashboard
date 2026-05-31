@@ -143,13 +143,13 @@ const ExperienceCard = ({
     className={cn(
       "rounded-[28px] border bg-surface p-5 transition",
       isActive
-        ? "border-terracotta shadow-[0_18px_50px_rgba(196,100,74,0.12)]"
+        ? "border-coral shadow-[0_18px_50px_rgba(232,169,155,0.12)]"
         : "border-border",
     )}
   >
     <div className="mb-4 flex items-center justify-between">
       <div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-terracotta">
+        <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-coral">
           经历 {index + 1}
         </p>
         <h3 className="mt-2 text-lg font-medium text-slate-950">
@@ -158,7 +158,7 @@ const ExperienceCard = ({
       </div>
       <div className="flex items-center gap-2">
         {isActive && (
-          <span className="rounded-full bg-terracotta px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-white">
+          <span className="rounded-full bg-coral px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-white">
             AI 当前作用于此
           </span>
         )}
@@ -168,7 +168,7 @@ const ExperienceCard = ({
             event.stopPropagation();
             onDelete(experience.id);
           }}
-          className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-terracotta hover:text-terracotta"
+          className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-coral-deep hover:text-coral"
         >
           删除
         </button>
@@ -761,57 +761,13 @@ function ResumeStudioContent({
 
   return (
     <div className="min-h-screen bg-bg text-slate-800">
-      <section className="mx-auto max-w-7xl px-6 pb-10 pt-8 lg:px-10">
-        <div className="rounded-[40px] border border-white/70 bg-white/80 p-6 shadow-[0_32px_120px_rgba(15,26,46,0.08)] backdrop-blur">
-          <div className="flex flex-wrap items-center justify-between gap-6 border-b border-border pb-8">
-            <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.36em] text-terracotta">
-                OfferLab MVP
-              </p>
-              <h1 className="mt-3 max-w-3xl font-display text-5xl leading-tight text-slate-950 md:text-6xl">
-                面向校招场景的 AI 简历工作台
-              </h1>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600">
-                用四步采集核心信息，右侧助手按当前步骤产出可回填建议卡片，生成后的简历可在中间区域逐块编辑并导出 PDF。
-              </p>
-            </div>
-            <div className="grid gap-4 rounded-[32px] border border-border bg-surface p-5 text-sm text-slate-600 md:w-[360px]">
-              <div className="flex items-center justify-between">
-                <span>当前模式</span>
-                <span className="rounded-full bg-terracotta px-3 py-1 text-xs uppercase tracking-[0.24em] text-white">
-                  {mode === "intake" ? "向导" : "编辑"}
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>草稿存储</span>
-                <span className="flex items-center gap-1.5 text-teal">
-                  <span className="inline-block h-2 w-2 rounded-full bg-teal" />
-                  云端存储
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>模型路由</span>
-                <span>{process.env.NEXT_PUBLIC_APP_MODEL_HINT ?? "Qwen / fallback"}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>AI 状态</span>
-                <span
-                  className={`flex items-center gap-1.5 ${aiConfigured ? "text-teal" : "text-amber-600"}`}
-                >
-                  <span
-                    className={`inline-block h-2 w-2 rounded-full ${aiConfigured ? "bg-teal" : "bg-amber-500"}`}
-                  />
-                  {aiConfigured ? "已就绪" : "未配置（使用本地规则）"}
-                </span>
-              </div>
-            </div>
-          </div>
+      <section className="mx-auto max-w-7xl px-6 pb-10 pt-6 lg:px-10">
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)_320px]">
-            <aside className="rounded-[32px] border border-border bg-surface p-5 shadow-[0_18px_60px_rgba(15,26,46,0.06)]">
+          <div className="mt-6 grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)_300px]">
+            <aside className="rounded-[32px] border border-border bg-surface p-5 shadow-[0_18px_60px_rgba(45,42,40,0.05)]">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-terracotta">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-coral">
                     工作流
                   </p>
                   <h2 className="mt-2 text-xl font-semibold text-slate-950">
@@ -830,7 +786,7 @@ function ResumeStudioContent({
                       setStatus("已开始新的草稿。");
                     });
                   }}
-                  className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-terracotta hover:text-terracotta"
+                  className="rounded-full border border-border px-3 py-2 text-xs text-slate-500 transition hover:border-coral-deep hover:text-coral"
                 >
                   新建草稿
                 </button>
@@ -845,8 +801,8 @@ function ResumeStudioContent({
                     className={cn(
                       "w-full rounded-[24px] border px-4 py-4 text-left transition",
                       currentStep === index
-                        ? "border-terracotta bg-terracotta text-white shadow-[0_18px_50px_rgba(196,100,74,0.22)]"
-                        : "border-border bg-white hover:border-terracotta/30",
+                        ? "border-coral bg-coral text-white shadow-[0_18px_50px_rgba(232,169,155,0.22)]"
+                        : "border-border bg-white hover:border-coral-deep/30",
                     )}
                   >
                     <div className="flex items-start justify-between gap-3">
@@ -872,7 +828,7 @@ function ResumeStudioContent({
                       <span
                         className={cn(
                           "mt-1 h-3 w-3 rounded-full",
-                          completion[index] ? "bg-teal" : "bg-border",
+                          completion[index] ? "bg-sage" : "bg-border",
                         )}
                       />
                     </div>
@@ -881,12 +837,12 @@ function ResumeStudioContent({
               </div>
             </aside>
 
-            <main className="rounded-[32px] border border-border bg-white p-6 shadow-[0_24px_80px_rgba(15,26,46,0.06)]">
+            <main className="rounded-[32px] border border-border bg-white p-6 shadow-[0_24px_80px_rgba(45,42,40,0.05)]">
               {mode === "intake" ? (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between border-b border-border pb-4">
                     <div>
-                      <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-terracotta">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-coral">
                         信息采集
                       </p>
                       <h2 className="mt-2 text-3xl font-semibold text-slate-950">
@@ -1112,7 +1068,7 @@ function ResumeStudioContent({
 
                   {currentStepId === "experience" && (
                     <div className="space-y-4">
-                      <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-terracotta">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-coral">
                         社会经历
                       </p>
                       {draft.experiences
@@ -1150,7 +1106,7 @@ function ResumeStudioContent({
                             experiences: [...current.experiences, next],
                           }));
                         }}
-                        className="rounded-full border border-dashed border-terracotta/40 px-4 py-3 text-sm text-terracotta transition hover:border-terracotta"
+                        className="rounded-full border border-dashed border-coral/40 px-4 py-3 text-sm text-coral transition hover:border-coral-deep"
                       >
                         + 新增社会经历
                       </button>
@@ -1230,7 +1186,7 @@ function ResumeStudioContent({
 
                   {currentStepId === "campus" && (
                     <div className="space-y-4">
-                      <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-terracotta">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-coral">
                         校园经历
                       </p>
                       {draft.experiences
@@ -1268,7 +1224,7 @@ function ResumeStudioContent({
                             experiences: [...current.experiences, next],
                           }));
                         }}
-                        className="rounded-full border border-dashed border-terracotta/40 px-4 py-3 text-sm text-terracotta transition hover:border-terracotta"
+                        className="rounded-full border border-dashed border-coral/40 px-4 py-3 text-sm text-coral transition hover:border-coral-deep"
                       >
                         + 新增校园经历
                       </button>
@@ -1284,7 +1240,7 @@ function ResumeStudioContent({
                         type="button"
                         disabled={currentStep === 0}
                         onClick={() => moveToStep(currentStep - 1)}
-                        className="rounded-full border border-border px-5 py-3 text-sm transition hover:border-terracotta hover:text-terracotta disabled:cursor-not-allowed disabled:opacity-40"
+                        className="rounded-full border border-border px-5 py-3 text-sm transition hover:border-coral-deep hover:text-coral disabled:cursor-not-allowed disabled:opacity-40"
                       >
                         上一步
                       </button>
@@ -1292,7 +1248,7 @@ function ResumeStudioContent({
                         <button
                           type="button"
                           onClick={() => moveToStep(currentStep + 1)}
-                          className="rounded-full bg-terracotta px-5 py-3 text-sm text-white transition hover:bg-terracotta-light"
+                          className="rounded-full bg-coral px-5 py-3 text-sm text-white transition hover:bg-coral-deep"
                         >
                           下一步
                         </button>
@@ -1301,7 +1257,7 @@ function ResumeStudioContent({
                           type="button"
                           disabled={isGenerating}
                           onClick={generateResume}
-                          className="rounded-full bg-terracotta px-5 py-3 text-sm text-white transition hover:bg-terracotta-light disabled:cursor-not-allowed disabled:opacity-60"
+                          className="rounded-full bg-coral px-5 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60"
                         >
                           {isGenerating ? "生成中..." : "生成简历"}
                         </button>
@@ -1313,7 +1269,7 @@ function ResumeStudioContent({
                 <div className="space-y-6">
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
                     <div>
-                      <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-terracotta">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-coral">
                         生成后编辑区
                       </p>
                       <h2 className="mt-2 text-3xl font-semibold text-slate-950">
@@ -1324,14 +1280,14 @@ function ResumeStudioContent({
                       <button
                         type="button"
                         onClick={() => setMode("intake")}
-                        className="rounded-full border border-border px-4 py-3 text-sm transition hover:border-terracotta hover:text-terracotta"
+                        className="rounded-full border border-border px-4 py-3 text-sm transition hover:border-coral-deep hover:text-coral"
                       >
                         返回采集
                       </button>
                       <button
                         type="button"
                         onClick={exportPdf}
-                        className="rounded-full bg-terracotta px-5 py-3 text-sm text-white transition hover:bg-terracotta-light"
+                        className="rounded-full bg-coral px-5 py-3 text-sm text-white transition hover:bg-coral-deep"
                       >
                         下载 PDF
                       </button>
@@ -1358,8 +1314,8 @@ function ResumeStudioContent({
               )}
             </main>
 
-            <aside className="ai-sidebar max-h-[calc(100vh-10rem)] overflow-y-auto rounded-[32px] border border-border bg-surface p-5 shadow-[0_20px_70px_rgba(15,26,46,0.06)]">
-              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-terracotta">
+            <aside className="ai-sidebar max-h-[calc(100vh-10rem)] overflow-y-auto rounded-[32px] border border-border bg-surface p-5 shadow-[0_20px_70px_rgba(45,42,40,0.05)]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-coral">
                 智能助手栏
               </p>
               <h2 className="mt-2 text-xl font-semibold text-slate-950">
@@ -1372,7 +1328,7 @@ function ResumeStudioContent({
               </p>
 
               {mode === "intake" && assistMode === "material_parse" && (
-                <div className="mt-4 rounded-[22px] border border-terracotta/30 bg-terracotta/10 px-4 py-3 text-sm text-terracotta">
+                <div className="mt-4 rounded-[22px] border border-coral/30 bg-coral/20 px-4 py-3 text-sm text-coral">
                   已识别为当前步骤材料，下面的建议卡片点击后才会写回表单。
                 </div>
               )}
@@ -1385,7 +1341,7 @@ function ResumeStudioContent({
                       "rounded-[24px] px-4 py-4 text-sm leading-7",
                       message.role === "assistant"
                         ? "bg-white text-slate-700"
-                        : "bg-terracotta text-white",
+                        : "bg-coral text-white",
                     )}
                   >
                     {message.content}
@@ -1400,11 +1356,11 @@ function ResumeStudioContent({
                       key={card.id}
                       type="button"
                       onClick={() => applyCard(card)}
-                      className="w-full rounded-[22px] border border-border bg-white px-4 py-3 text-left text-sm transition hover:border-terracotta hover:text-terracotta"
+                      className="w-full rounded-[22px] border border-border bg-white px-4 py-3 text-left text-sm transition hover:border-coral-deep hover:text-coral"
                     >
                       <div className="flex items-center justify-between gap-3">
                         <p className="font-medium">{card.label}</p>
-                        <span className="rounded-full bg-[var(--color-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-terracotta">
+                        <span className="rounded-full bg-[var(--color-bg)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-coral">
                           一键应用
                         </span>
                       </div>
@@ -1421,7 +1377,7 @@ function ResumeStudioContent({
 
               {mode === "edit" && selectedBlockId !== "skills" && (
                 <div className="mt-5 rounded-[24px] border border-border bg-white p-4">
-                  <p className="text-xs uppercase tracking-[0.26em] text-terracotta">
+                  <p className="text-xs uppercase tracking-[0.26em] text-coral">
                     当前选中
                   </p>
                   <p className="mt-2 text-sm font-medium text-slate-950">
@@ -1439,7 +1395,7 @@ function ResumeStudioContent({
                     type="button"
                     disabled={isRewriting}
                     onClick={rewriteSelectedBlock}
-                    className="mt-4 w-full rounded-full bg-terracotta px-4 py-3 text-sm text-white transition hover:bg-terracotta-light disabled:cursor-not-allowed disabled:opacity-60"
+                    className="mt-4 w-full rounded-full bg-coral px-4 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isRewriting ? "改写中..." : "改写当前区块"}
                   </button>
@@ -1467,18 +1423,18 @@ function ResumeStudioContent({
                     type="button"
                     disabled={isChatLoading}
                     onClick={sendAssist}
-                    className="mt-4 w-full rounded-full bg-terracotta px-4 py-3 text-sm text-white transition hover:bg-terracotta-light disabled:cursor-not-allowed disabled:opacity-60"
+                    className="mt-4 w-full rounded-full bg-coral px-4 py-3 text-sm text-white transition hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isChatLoading ? "思考中..." : "发送"}
                   </button>
                 </div>
               ) : (
-                <div className="mt-5 rounded-[24px] border border-dashed border-terracotta/30 px-4 py-4 text-sm leading-7 text-slate-500">
+                <div className="mt-5 rounded-[24px] border border-dashed border-coral/30 px-4 py-4 text-sm leading-7 text-slate-500">
                   建议按区块逐个修改。优先改“个人概述”和单条项目要点，最稳妥。
                 </div>
               )}
 
-              <div className="mt-5 rounded-[24px] bg-navy px-4 py-4 text-sm leading-7 text-white">
+              <div className="mt-5 rounded-[24px] bg-coral-deep px-4 py-4 text-sm leading-7 text-white">
                 {status || "草稿已自动保存到云端，刷新页面后也会保留当前进度。"}
               </div>
 
@@ -1500,7 +1456,6 @@ function ResumeStudioContent({
               />
             </aside>
           </div>
-        </div>
       </section>
     </div>
   );

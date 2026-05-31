@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Outfit, IBM_Plex_Mono } from "next/font/google";
+import { Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-
-const display = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-});
 
 const sans = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const mono = IBM_Plex_Mono({
@@ -34,7 +28,7 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
+      className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
     </html>

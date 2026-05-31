@@ -24,8 +24,8 @@ const BlockButton = ({
     className={cn(
       "w-full rounded-[28px] border p-5 text-left transition",
       active
-        ? "border-terracotta bg-terracotta text-white shadow-[0_20px_70px_rgba(196,100,74,0.18)]"
-        : "border-border bg-surface text-slate-700 hover:border-terracotta-light hover:bg-white",
+        ? "border-coral bg-coral text-white shadow-[0_20px_70px_rgba(232,169,155,0.18)]"
+        : "border-border bg-surface text-slate-700 hover:border-coral-deep hover:bg-white",
     )}
   >
     {children}
@@ -40,11 +40,11 @@ export function ResumePreview({
 }: ResumePreviewProps) {
   return (
     <div className="space-y-5">
-      <div className="rounded-[36px] border border-border bg-surface p-8 shadow-[0_24px_90px_rgba(15,26,46,0.06)]">
+      <div className="rounded-[36px] border border-border bg-surface p-8 shadow-[0_24px_90px_rgba(45,42,40,0.05)]">
         {/* Header: 姓名 + 职位 + 联系方式 */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-5">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.28em] text-terracotta">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-coral">
               简历工作台
             </p>
             <h3 className="mt-2 text-2xl font-semibold text-slate-950">
@@ -66,7 +66,7 @@ export function ResumePreview({
           {/* 教育经历 */}
           {draft.resumeSections.education.length > 0 && draft.resumeSections.education.some((item) => item.school || item.degreeLine || item.detailLine) && (
             <div className="space-y-4">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-terracotta">教育经历</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-coral">教育经历</p>
               {draft.resumeSections.education.map((item) => (
                 <BlockButton
                   key={item.id}
@@ -87,7 +87,7 @@ export function ResumePreview({
           {/* 校园经历 */}
           {draft.experiences.filter((exp) => exp.kind === "campus" && (exp.name || exp.responsibility)).length > 0 && (
             <div className="space-y-4">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-terracotta">校园经历</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-coral">校园经历</p>
               {draft.experiences
                 .filter((exp) => exp.kind === "campus" && (exp.name || exp.responsibility))
                 .map((exp) => (
@@ -105,7 +105,7 @@ export function ResumePreview({
                         )}
                       </div>
                       {exp.timeframe && (
-                        <span className="shrink-0 rounded-full bg-bg px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-terracotta">
+                        <span className="shrink-0 rounded-full bg-bg px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-coral">
                           {exp.timeframe}
                         </span>
                       )}
@@ -129,7 +129,7 @@ export function ResumePreview({
           {/* 社会经历 */}
           {draft.experiences.filter((exp) => exp.kind === "social" && (exp.name || exp.responsibility)).length > 0 && (
             <div className="space-y-4">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-terracotta">社会经历</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-coral">社会经历</p>
               {draft.experiences
                 .filter((exp) => exp.kind === "social" && (exp.name || exp.responsibility))
                 .map((exp) => (
@@ -147,7 +147,7 @@ export function ResumePreview({
                         )}
                       </div>
                       {exp.timeframe && (
-                        <span className="shrink-0 rounded-full bg-bg px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-terracotta">
+                        <span className="shrink-0 rounded-full bg-bg px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-coral">
                           {exp.timeframe}
                         </span>
                       )}
@@ -171,7 +171,7 @@ export function ResumePreview({
           {/* 技能证书 */}
           {draft.resumeSections.skills.groups.length > 0 && (
             <div className="space-y-4">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-terracotta">技能证书</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-coral">技能证书</p>
               <BlockButton
                 active={activeBlockId === "skills"}
                 blockId="skills"
