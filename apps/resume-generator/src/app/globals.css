@@ -1,34 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #f7f5f0;
+  --color-surface: #ffffff;
+  --color-navy: #0f1a2e;
+  --color-navy-light: #1a2d4a;
+  --color-terracotta: #c4644a;
+  --color-terracotta-light: #e0896e;
+  --color-teal: #2d7d7a;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b6560;
+  --color-text-muted: #a09890;
+  --color-border: #e2ddd6;
+  --color-border-hover: #c9c2b8;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-manrope);
-  --font-mono: var(--font-plex-mono);
-  --font-display: var(--font-cormorant);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-outfit), 'PingFang SC', 'Noto Sans SC', sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+  --font-display: var(--font-bricolage), 'PingFang SC', sans-serif;
+  --color-navy: var(--color-navy);
+  --color-navy-light: var(--color-navy-light);
+  --color-terracotta: var(--color-terracotta);
+  --color-terracotta-light: var(--color-terracotta-light);
+  --color-teal: var(--color-teal);
+  --color-border: var(--color-border);
+  --color-border-hover: var(--color-border-hover);
+  --color-muted: var(--color-text-muted);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), sans-serif;
-}
-
-.font-display {
-  font-family: var(--font-display), serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
 }
 
 .field {
@@ -40,20 +46,23 @@ body {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #0284c7;
+  color: var(--color-text-muted);
+  font-weight: 600;
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
-  border-radius: 1.25rem;
-  border: 1px solid #dbeafe;
-  background: #fcfeff;
+  border-radius: 20px;
+  border: none;
+  background: #f7f5f0;
   padding: 0.95rem 1rem;
-  color: #0f172a;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: inset 0 1px 3px rgba(15,26,46,0.06);
+  transition: box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .field textarea {
@@ -64,28 +73,25 @@ body {
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 3px rgba(196, 100, 74, 0.12), inset 0 1px 3px rgba(15,26,46,0.06);
   background: #ffffff;
 }
 
-.toast-enter {
-  animation: toast-in 0.3s ease-out forwards;
-}
+.toast-enter { animation: toast-in 0.3s ease-out forwards; }
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(-12px) scale(0.96); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes flash-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-  50% { box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(196, 100, 74, 0.25); }
+  50% { box-shadow: 0 0 0 4px rgba(196, 100, 74, 0.1); }
+  100% { box-shadow: 0 0 0 0 rgba(196, 100, 74, 0); }
 }
 .field-flash { animation: flash-pulse 1.5s ease-out; }
 .stream-cursor::after {
   content: "|";
   animation: blink 0.7s step-end infinite;
-  color: #2563eb;
+  color: var(--color-terracotta);
   font-weight: 300;
 }
 @keyframes blink { 50% { opacity: 0; } }
@@ -95,24 +101,15 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .thinking-block {
-  background: #f1f5f9;
+  background: #edeae4;
   border-radius: 16px;
   padding: 12px 16px;
   font-size: 0.85rem;
-  color: #475569;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
-.ai-sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-.ai-sidebar::-webkit-scrollbar-track {
-  background: transparent;
-}
-.ai-sidebar::-webkit-scrollbar-thumb {
-  background: #d1d9e6;
-  border-radius: 8px;
-}
-.ai-sidebar::-webkit-scrollbar-thumb:hover {
-  background: #a0b4cc;
-}
+.ai-sidebar::-webkit-scrollbar { width: 4px; }
+.ai-sidebar::-webkit-scrollbar-track { background: transparent; }
+.ai-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 8px; }
+.ai-sidebar::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
